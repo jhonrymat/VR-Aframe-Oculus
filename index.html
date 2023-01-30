@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Oculus Quest 2 - Aframe VR</title>
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="scripts/change-color.js"></script>
+    <script src="scripts/change-site.js"></script>
+    <script src="scripts/change-sound.js"></script>
+
+  </head>
+  <body>
+    <a-scene background="color: red" renderer="antialias: true">
+      <a-assets>
+        <img
+          id="point1"
+          src="https://cdn.glitch.global/5efc2f0d-5acd-40c2-a117-4b75ad67ef4a/ofi.ini.jpg?v=1674787212957"
+          crossorigin="anonymous"
+        />
+        <img
+          id="point2"
+          src="https://cdn.glitch.global/5efc2f0d-5acd-40c2-a117-4b75ad67ef4a/ofi-entrada.jpg?v=1674788150223"
+          crossorigin="anonymous"
+          />
+        <img
+          id="hotspot"
+          src="https://cdn.glitch.global/5efc2f0d-5acd-40c2-a117-4b75ad67ef4a/navigation.svg?v=1674791531124"
+          crossorigin="anonymous"
+          />
+          <audio src="sound/teleport.ogg" id="teleportate" preload="none"></audio>
+      </a-assets>
+      <!-- puntos guias-->
+      <a-entity id="spots" hotspots>
+        <a-entity id="group-point1">
+          <a-image
+            id="punto1"
+            spot="linkto:#point2;spotgroup:group-point2"
+            position="9 1 3"
+            rotation="0 90 0"
+            basic-interactions
+            audiohandler
+            animation="property: position; to: 9 1.5 3;  dir: alternate; dur: 1000; easing: linear; loop: true" 
+            
+          ></a-image>          
+        </a-entity>
+        <a-entity id="group-point2" scale="0 0 0">
+          <a-image
+            spot="linkto:#point1;spotgroup:group-point1"
+            position="-9 0 5"
+            rotation="0 90 0"
+            basic-interactions
+            audiohandler
+            animation="property: position; to: -9 0.5 5; dir: alternate; dur: 1000; easing: linear; loop: true" 
+            sound="on: mousecenter; src:#teleportate"
+          ></a-image>
+        </a-entity>
+      </a-entity>
+      <!-- CAMARA RIG -->
+      <a-entity position="0 0 4" rotation="0 -90 0">
+        <!-- CAMARA -->
+        <a-camera></a-camera>
+        <a-entity laser-controls="hand: right"></a-entity>
+      </a-entity>
+
+      <a-sky id="skybox" src="#point1"></a-sky>
+      
+    </a-scene>
+  </body>
+</html>
