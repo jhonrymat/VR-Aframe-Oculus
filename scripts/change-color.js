@@ -3,7 +3,7 @@
         var el = this.el;
 
         el.addEventListener("mouseenter", function () {
-            el.setAttribute("material", "color", "#AA0000");
+            el.setAttribute("material", "color", "#FBEFF2");
         });
         // el.addEventListener("mouseleave", function () {
         //     el.setAttribute("material", "color", "#FFFFFF");
